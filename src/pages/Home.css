@@ -155,6 +155,61 @@
   margin-bottom: 10px;
 }
 
+
+/* ==============================
+   PRODUCT SECTION – RESPONSIVE FIX
+================================= */
+
+/* Prevent horizontal overflow */
+.products-section {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Desktop default stays same */
+.product-card {
+  width: 30%;
+}
+
+/* Tablet view */
+@media (max-width: 992px) {
+  .product-card {
+    width: 45%;
+  }
+
+  .product-card img {
+    width: 70%;
+    height: auto;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+  .hh1 {
+    font-size: 28px;
+    padding: 20px;
+  }
+
+  .produc {
+    gap: 15px;
+  }
+
+  .product-card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Disable hover scaling on mobile */
+  .product-card:hover {
+    transform: none;
+  }
+}
+
 /* ==============================
    FEATURED PLANTS (UPDATED)
 ================================= */
