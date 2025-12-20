@@ -96,41 +96,43 @@ const Home = () => {
       </section>
 
       {/* ---------------- PRODUCTS SECTION ---------------- */}
-      <div className="products-section">
-        <h1 className="hh1">⭐Products Section⭐</h1>
-        <div className="produc">
-          <div className="product-card">
-            <img src={q1} alt="" />
-            <h3>Best Selling Pack</h3>
-            <p>Get 50% off on our most popular plants</p>
-          </div>
-          <div className="product-card">
-            <img src={q2} alt="" />
-            <h3>Top Rated Collection</h3>
-            <p>Get 40% off on customer favorites</p>
-          </div>
-          <div className="product-card">
-            <img src={q3} alt="" />
-            <h3>New Arrivals</h3>
-            <p>Flat 25% off on fresh arrivals</p>
-          </div>
-          <div className="product-card">
-            <img src={q4} alt="" />
-            <h3>Trending Plants</h3>
-            <p>BOGO Offer on trending plants</p>
-          </div>
-          <div className="product-card">
-            <img src={q5} alt="" />
-            <h3>Decor Pack</h3>
-            <p>Special combo for home decor</p>
-          </div>
-          <div className="product-card">
-            <img src={q6} alt="" />
-            <h3>Premium Pot</h3>
-            <p>Free delivery on premium pots</p>
-          </div>
-        </div>
+    <div className="products-section">
+  <h1 className="hh1">⭐Products Section⭐</h1>
+
+  <div className="produc">
+    <div className="product-card">
+      <div className="img-box">
+        <img src={q1} alt="Best Selling Pack" />
       </div>
+      <h3>Best Selling Pack</h3>
+      <p>Get 50% off on our most popular plants</p>
+    </div>
+
+    <div className="product-card">
+      <div className="img-box">
+        <img src={q2} alt="Top Rated Collection" />
+      </div>
+      <h3>Top Rated Collection</h3>
+      <p>Get 40% off on customer favorites</p>
+    </div>
+
+    <div className="product-card">
+      <div className="img-box">
+        <img src={q3} alt="New Arrivals" />
+      </div>
+      <h3>New Arrivals</h3>
+      <p>Flat 25% off on fresh arrivals</p>
+    </div>
+
+    <div className="product-card">
+      <div className="img-box">
+        <img src={q4} alt="Trending Plants" />
+      </div>
+      <h3>Trending Plants</h3>
+      <p>BOGO Offer on trending plants</p>
+    </div>
+  </div>
+</div>
 
 {/* ---------------- Parllax img  ---------------- */}
 
