@@ -109,106 +109,98 @@
 /* ==============================
    PRODUCT SECTION
 ================================= */
+/* ============================== PRODUCT SECTION ================================= */
+
 .products-section {
-  margin-top: 0px;
-  background: white;
-  padding: 0px;
-  border-radius: 8px;
+  background: #ffffff;
+  padding: 40px 20px;
 }
 
-.hh1{
+.hh1 {
   text-align: center;
-    padding:30px ;
-    color: #003615;
-    font-size: 40px;
+  padding-bottom: 30px;
+  color: #003615;
+  font-size: 40px;
 }
 
+/* GRID LAYOUT */
 .produc {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: auto;
 }
 
+/* CARD */
 .product-card {
-  width: 30%;
   background: #fff;
-  outline: 1px solid #e1e1e1;
-  border-radius: 8px;
-  padding: 15px;
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
 }
 
 .product-card:hover {
-  transform: scale(0.9);
-  outline: 2px solid #a0d48e;
+  transform: translateY(-8px);
+  border-color: #a0d48e;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
+/* IMAGE */
 .product-card img {
-  width: 50%;
-  height: 270px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-
-/* ==============================
-   PRODUCT SECTION – RESPONSIVE FIX
-================================= */
-
-/* Prevent horizontal overflow */
-.products-section {
   width: 100%;
-  overflow-x: hidden;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
-/* Desktop default stays same */
-.product-card {
-  width: 30%;
+/* TEXT */
+.product-card h3 {
+  font-size: 20px;
+  color: #003615;
+  margin-bottom: 8px;
 }
 
-/* Tablet view */
-@media (max-width: 992px) {
-  .product-card {
-    width: 45%;
-  }
-
-  .product-card img {
-    width: 70%;
-    height: auto;
-  }
+.product-card p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.4;
 }
 
-/* Mobile view */
-@media (max-width: 600px) {
+/* ================== RESPONSIVE BREAKPOINTS ================== */
+
+/* Tablet */
+@media (max-width: 768px) {
   .hh1 {
-    font-size: 28px;
-    padding: 20px;
-  }
-
-  .produc {
-    gap: 15px;
-  }
-
-  .product-card {
-    width: 100%;
-    padding: 12px;
+    font-size: 32px;
   }
 
   .product-card img {
-    width: 100%;
-    height: auto;
-  }
-
-  /* Disable hover scaling on mobile */
-  .product-card:hover {
-    transform: none;
+    height: 200px;
   }
 }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .hh1 {
+    font-size: 26px;
+  }
+
+  .product-card {
+    padding: 16px;
+  }
+
+  .product-card img {
+    height: 180px;
+  }
+}
+
+
 
 /* ==============================
    FEATURED PLANTS (UPDATED)
