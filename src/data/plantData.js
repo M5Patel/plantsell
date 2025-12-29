@@ -1,0 +1,86 @@
+// Comprehensive plant catalog
+export const plantCategories = [
+  {
+    id: 1,
+    name: "Indoor Plants",
+    slug: "indoor",
+    icon: "🏠",
+    description: "Perfect plants for your home interior",
+    image: "https://images.unsplash.com/photo-1530836369250-ef72a3649cda?w=500&h=300&fit=crop",
+  },
+  {
+    id: 2,
+    name: "Flowering Plants",
+    slug: "flowering",
+    icon: "🌸",
+    description: "Colorful blooming plants",
+    image: "https://images.unsplash.com/photo-1578263425996-c0e38e55a522?w=500&h=300&fit=crop",
+  },
+  {
+    id: 3,
+    name: "Succulents",
+    slug: "succulents",
+    icon: "🌵",
+    description: "Low maintenance desert plants",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500&h=300&fit=crop",
+  },
+  {
+    id: 4,
+    name: "Outdoor Plants",
+    slug: "outdoor",
+    icon: "🌳",
+    description: "Garden and patio plants",
+    image: "https://images.unsplash.com/photo-1455639584886-1bc7f8f76e06?w=500&h=300&fit=crop",
+  },
+  {
+    id: 5,
+    name: "Climbing Plants",
+    slug: "climbing",
+    icon: "🌿",
+    description: "Vines and creeping plants",
+    image: "https://images.unsplash.com/photo-1545241b8c71-aaad9ef8b6b0?w=500&h=300&fit=crop",
+  },
+];
+
+export const plantProducts = {
+  indoor: [
+    { id: 101, name: "Areca Palm", price: 399, rating: "4.5", category: "indoor", image: "https://images.unsplash.com/photo-1616993768181-92335ad3a33a?w=400&h=300&fit=crop", description: "Beautiful tropical palm perfect for living rooms. Grows up to 6-8 feet." },
+    { id: 102, name: "Money Plant", price: 299, rating: "4.8", category: "indoor", image: "https://images.unsplash.com/photo-1527265033424-d282a42896e2?w=400&h=300&fit=crop", description: "Low maintenance climbing plant. Great for shelves and hanging baskets." },
+    { id: 103, name: "Syngonium", price: 499, rating: "4.9", category: "indoor", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad576?w=400&h=300&fit=crop", description: "Stunning pink and green variegated leaves. Adaptable to various light conditions." },
+    { id: 104, name: "Snake Plant", price: 349, rating: "4.7", category: "indoor", image: "https://images.unsplash.com/photo-1567359781514-3b963ff6be18?w=400&h=300&fit=crop", description: "Extremely resilient air-purifying plant. Perfect for beginners." },
+    { id: 105, name: "Pothos", price: 279, rating: "4.6", category: "indoor", image: "https://images.unsplash.com/photo-1588422938319-37f3a2e4e4c9?w=400&h=300&fit=crop", description: "Trailing vine with heart-shaped leaves. Very easy to grow." },
+    { id: 106, name: "Rubber Plant", price: 449, rating: "4.8", category: "indoor", image: "https://images.unsplash.com/photo-1567873728394-6c7ebc2d7888?w=400&h=300&fit=crop", description: "Large glossy leaves that purify air. Statement plant for any room." },
+  ],
+  flowering: [
+    { id: 201, name: "Bougainvillea", price: 449, rating: "4.7", category: "flowering", image: "https://images.unsplash.com/photo-1578263425996-c0e38e55a522?w=400&h=300&fit=crop", description: "Vibrant colorful bracts. Blooms throughout the year in warm weather." },
+    { id: 202, name: "Orchid", price: 599, rating: "4.9", category: "flowering", image: "https://images.unsplash.com/photo-1620160738789-b4b5c3f9e5d4?w=400&h=300&fit=crop", description: "Exotic flowers in various colors. Elegant and sophisticated." },
+    { id: 203, name: "Jasmine", price: 379, rating: "4.8", category: "flowering", image: "https://images.unsplash.com/photo-1600232983520-b14a4a04bece?w=400&h=300&fit=crop", description: "Fragrant white flowers. Beautiful climber for trellises." },
+    { id: 204, name: "Hibiscus", price: 429, rating: "4.6", category: "flowering", image: "https://images.unsplash.com/photo-1599599810694-b5ac4dd33da9?w=400&h=300&fit=crop", description: "Large showy flowers. Tropical beauty for gardens." },
+    { id: 205, name: "Rose Bush", price: 549, rating: "4.9", category: "flowering", image: "https://images.unsplash.com/photo-1518537569899-a7433ea79b27?w=400&h=300&fit=crop", description: "Classic romantic blooms. Available in multiple colors." },
+    { id: 206, name: "Sunflower", price: 349, rating: "4.7", category: "flowering", image: "https://images.unsplash.com/photo-1599151573675-7d31c9e3fa1d?w=400&h=300&fit=crop", description: "Bright cheerful flowers. Perfect for sunny spots." },
+  ],
+  succulents: [
+    { id: 301, name: "Aloe Vera", price: 249, rating: "4.8", category: "succulents", image: "https://images.unsplash.com/photo-1596848212624-5c4e6b0abb35?w=400&h=300&fit=crop", description: "Medicinal succulent. Low water needs, great for healing gel." },
+    { id: 302, name: "Jade Plant", price: 329, rating: "4.7", category: "succulents", image: "https://images.unsplash.com/photo-1603081553238-2e6f0437046d?w=400&h=300&fit=crop", description: "Tree-like succulent. Symbol of prosperity and luck." },
+    { id: 303, name: "Echeveria", price: 279, rating: "4.9", category: "succulents", image: "https://images.unsplash.com/photo-1604586051697-e21c8c5c87d0?w=400&h=300&fit=crop", description: "Rosette-shaped succulent. Available in various colors." },
+    { id: 304, name: "Cactus Mix", price: 199, rating: "4.6", category: "succulents", image: "https://images.unsplash.com/photo-1630064155921-5f1e1810bfcd?w=400&h=300&fit=crop", description: "Variety of cactus plants. Minimal care required." },
+    { id: 305, name: "Sedum", price: 289, rating: "4.8", category: "succulents", image: "https://images.unsplash.com/photo-1634926274396-b9ea48f6d816?w=400&h=300&fit=crop", description: "Compact ground cover succulent. Drought tolerant." },
+    { id: 306, name: "String of Pearls", price: 349, rating: "4.7", category: "succulents", image: "https://images.unsplash.com/photo-1596848212624-5c4e6b0abb35?w=400&h=300&fit=crop", description: "Unique hanging succulent. Trailing with pearl-like leaves." },
+  ],
+  outdoor: [
+    { id: 401, name: "Neem Tree", price: 599, rating: "4.8", category: "outdoor", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop", description: "Medicinal tree. Provides natural pesticide properties." },
+    { id: 402, name: "Tulsi Plant", price: 279, rating: "4.9", category: "outdoor", image: "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&h=300&fit=crop", description: "Sacred herb. Used in Ayurveda and traditional medicine." },
+    { id: 403, name: "Lemon Tree", price: 699, rating: "4.7", category: "outdoor", image: "https://images.unsplash.com/photo-1599599810411-72a5a9c1d262?w=400&h=300&fit=crop", description: "Fruit-bearing tree. Fresh lemons year-round." },
+    { id: 404, name: "Bamboo Plant", price: 449, rating: "4.6", category: "outdoor", image: "https://images.unsplash.com/photo-1532356122144-f7ae58218e50?w=400&h=300&fit=crop", description: "Fast growing, creates privacy screen. Sustainable material." },
+    { id: 405, name: "Frangipani", price: 529, rating: "4.8", category: "outdoor", image: "https://images.unsplash.com/photo-1585621173812-f2d89f74e97a?w=400&h=300&fit=crop", description: "Fragrant tropical flowers. White and yellow blooms." },
+    { id: 406, name: "Hibiscus Tree", price: 579, rating: "4.7", category: "outdoor", image: "https://images.unsplash.com/photo-1585310735409-b2b6f7b0c1c0?w=400&h=300&fit=crop", description: "Large flowering tree. Creates stunning garden display." },
+  ],
+  climbing: [
+    { id: 501, name: "Ivy", price: 349, rating: "4.8", category: "climbing", image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=300&fit=crop", description: "Classic climbing vine. Excellent wall coverage." },
+    { id: 502, name: "Passion Fruit Vine", price: 479, rating: "4.7", category: "climbing", image: "https://images.unsplash.com/photo-1599599810694-b5ac4dd33da9?w=400&h=300&fit=crop", description: "Exotic climbing plant. Produces delicious passion fruit." },
+    { id: 503, name: "Morning Glory", price: 279, rating: "4.9", category: "climbing", image: "https://images.unsplash.com/photo-1578622636906-f86e27a37f0a?w=400&h=300&fit=crop", description: "Fast growing with blue flowers. Perfect for trellises." },
+    { id: 504, name: "Clematis", price: 429, rating: "4.8", category: "climbing", image: "https://images.unsplash.com/photo-1520763185298-1b434c919abe?w=400&h=300&fit=crop", description: "Elegant vine with purple flowers. Long blooming season." },
+    { id: 505, name: "Grapevine", price: 549, rating: "4.6", category: "climbing", image: "https://images.unsplash.com/photo-1599599810694-b5ac4dd33da9?w=400&h=300&fit=crop", description: "Fruit-bearing climbing plant. Great for pergolas." },
+    { id: 506, name: "Honeysuckle", price: 349, rating: "4.9", category: "climbing", image: "https://images.unsplash.com/photo-1585310735409-b2b6f7b0c1c0?w=400&h=300&fit=crop", description: "Fragrant climbing vine. Attracts butterflies and hummingbirds." },
+  ],
+};

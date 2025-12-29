@@ -393,6 +393,10 @@
     font-size: 1.8rem;
   }
 
+  .cart-header {
+    margin-bottom: 30px;
+  }
+
   .cart-item {
     grid-template-columns: 70px 1fr auto;
     gap: 10px;
@@ -415,5 +419,32 @@
 
   .cart-summary {
     position: static;
+  }
+
+  .empty-cart {
+    padding: 60px 20px;
+  }
+
+  .empty-cart h2 {
+    font-size: 1.5rem;
+  }
+
+  .continue-btn,
+  .checkout-btn,
+  .clear-btn {
+    font-size: 0.9rem;
+    padding: 10px 16px !important;
+  }
+
+  .summary-details {
+    font-size: 0.9rem;
+  }
+
+  .summary-row {
+    padding: 8px 0;
+  }
+
+  .summary-row.total {
+    font-size: 1.1rem;
   }
 }

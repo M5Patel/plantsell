@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { Delete as DeleteIcon, Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
 import { Button, IconButton } from "@mui/material";
@@ -24,6 +25,7 @@ const itemVariants = {
 };
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } =
     useCart();
 
@@ -48,6 +50,15 @@ const Cart = () => {
         >
           <h2>Your cart is empty</h2>
           <p>Add some beautiful plants to get started! 🌿</p>
+          <motion.button
+            className="continue-btn"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/")}
+            style={{ marginTop: "20px" }}
+          >
+            Continue Shopping
+          </motion.button>
         </motion.div>
       ) : (
         <div className="cart-content">
@@ -164,6 +175,7 @@ const Cart = () => {
                 className="continue-btn"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => navigate("/")}
               >
                 Continue Shopping
               </motion.button>

@@ -145,6 +145,105 @@ const Home = () => {
               </motion.p>
             </Carousel.Caption>
           </Carousel.Item>
+
+          <Carousel.Item>
+            <div className="festive-slide christmas-slide">
+              <div className="festive-content">
+                <motion.h2
+                  className="slide-title"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  🎄 Holiday Season Specials! 🎄
+                </motion.h2>
+                <motion.p
+                  className="slide-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  Get 30% OFF on all Plants this Christmas!
+                </motion.p>
+                <motion.button
+                  className="festive-btn"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Shop Now
+                </motion.button>
+              </div>
+            </div>
+          </Carousel.Item>
+
+          <Carousel.Item>
+            <div className="festive-slide summer-slide">
+              <div className="festive-content">
+                <motion.h2
+                  className="slide-title"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  ☀️ Summer Offer! ☀️
+                </motion.h2>
+                <motion.p
+                  className="slide-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  Perfect time to refresh your space with vibrant greens!
+                </motion.p>
+                <motion.button
+                  className="festive-btn"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Explore Collection
+                </motion.button>
+              </div>
+            </div>
+          </Carousel.Item>
+
+          <Carousel.Item>
+            <div className="festive-slide diwali-slide">
+              <div className="festive-content">
+                <motion.h2
+                  className="slide-title"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  ✨ Festival of Lights ✨
+                </motion.h2>
+                <motion.p
+                  className="slide-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  Brighten your home with beautiful plants & 25% discount!
+                </motion.p>
+                <motion.button
+                  className="festive-btn"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Deals
+                </motion.button>
+              </div>
+            </div>
+          </Carousel.Item>
         </Carousel>
       </motion.div>
 
@@ -266,11 +365,7 @@ const Home = () => {
       </motion.div>
     </motion.div>
 
-{/* PARALLAX IMG  */}
 
-<div className="parent">
-  <div className="parallax"></div>
-</div>
 
       {/* WHY US */}
       <section className="why-us-section" data-aos="fade-up">
@@ -491,48 +586,7 @@ const Home = () => {
       </section>
 
       {/* FOOTER */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div className="footer-content">
-
-          <div className="footer-logo">
-            <img src={Logo} alt="Plants Logo" />
-          </div>
-
-          <div className="footer-section">
-            <h3>Quick Links</h3>
-            <a href="/">🏡 Home</a>
-            <a href="/">🪴 Shop Plants</a>
-            <a href="/">🌿 Plant Care</a>
-            <a href="/">📖 About Us</a>
-          </div>
-
-          <div className="footer-section">
-            <h3>Support</h3>
-            <a href="/">🚚 Shipping Info</a>
-            <a href="/">↩️ Returns Policy</a>
-            <a href="/">❓ FAQ</a>
-          </div>
-
-          <div className="footer-section">
-            <h3>Contact</h3>
-            <a href="/">📧 m5plants@plantshop.com</a>
-            <a href="/">📞 +91 9876543210</a>
-            <p>📍 Green Street, Plant City</p>
-          </div>
-
-        </div>
-
-        <div className="footer-divider"></div>
-
-        <div className="footer-bottom">
-          <p>© 2025 Plant Shop. All rights reserved.</p>
-        </div>
-      </motion.footer>
+      {/* Footer removed - using separate Footer component */}
 
     </>
   );
