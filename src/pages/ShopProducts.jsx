@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { plantProducts } from "../data/plantData";
+import ProductDetailModal from "../components/ProductDetailModal";
 import "../styles/ShopProducts.css";
 
 const containerVariants = {
@@ -28,6 +29,7 @@ const ShopProducts = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [priceSort, setPriceSort] = useState("all");
 
   useEffect(() => {
     AOS.init({ duration: 600, easing: "ease-in-out", once: true });
@@ -45,8 +47,15 @@ const ShopProducts = () => {
       );
     }
 
+    // Sort by price
+    if (priceSort === "low-high") {
+      products = [...products].sort((a, b) => a.price - b.price);
+    } else if (priceSort === "high-low") {
+      products = [...products].sort((a, b) => b.price - a.price);
+    }
+
     setFilteredProducts(products);
-  }, [selectedCategory, searchTerm]);
+  }, [selectedCategory, searchTerm, priceSort]);
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -64,36 +73,47 @@ const ShopProducts = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1>🌿 Shop Plants</h1>
+        <h1>🌿 Shop Our Plants</h1>
         <p>{filteredProducts.length} products available {searchTerm && `matching "${searchTerm}"`}</p>
       </motion.div>
 
-      {/* Category Filter */}
+      {/* Category & Sort Filters */}
       <motion.div
-        className="category-tabs"
+        className="filters-section"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.4 }}
       >
-        <motion.button
-          className={`tab ${selectedCategory === "all" ? "active" : ""}`}
-          onClick={() => setSelectedCategory("all")}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          All Plants
-        </motion.button>
-        {categories.map((cat) => (
+        <div className="category-tabs">
           <motion.button
-            key={cat}
-            className={`tab ${selectedCategory === cat ? "active" : ""}`}
-            onClick={() => setSelectedCategory(cat)}
+            className={`tab ${selectedCategory === "all" ? "active" : ""}`}
+            onClick={() => setSelectedCategory("all")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            All Plants
           </motion.button>
-        ))}
+          {categories.map((cat) => (
+            <motion.button
+              key={cat}
+              className={`tab ${selectedCategory === cat ? "active" : ""}`}
+              onClick={() => setSelectedCategory(cat)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </motion.button>
+          ))}
+        </div>
+
+        <motion.div className="sort-controls">
+          <label>Sort by Price:</label>
+          <select value={priceSort} onChange={(e) => setPriceSort(e.target.value)}>
+            <option value="all">All</option>
+            <option value="low-high">Low to High</option>
+            <option value="high-low">High to Low</option>
+          </select>
+        </motion.div>
       </motion.div>
 
       {/* Main Layout */}
@@ -111,14 +131,20 @@ const ShopProducts = () => {
                 key={product.id}
                 className="product-card"
                 variants={itemVariants}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -8, boxShadow: "0 12px 30px rgba(76, 175, 80, 0.2)" }}
                 data-aos="fade-up"
-                onClick={() => setSelectedProduct(product)}
               >
                 <div className="product-img-wrapper">
-                  <img src={product.image} alt={product.name} />
+                  <img src={product.image} alt={product.name} className="product-main-img" />
                   <div className="product-overlay">
-                    <span className="view-btn">View Details</span>
+                    <motion.button
+                      className="view-btn"
+                      onClick={() => setSelectedProduct(product)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      👁️ View Details
+                    </motion.button>
                   </div>
                 </div>
 
@@ -138,119 +164,31 @@ const ShopProducts = () => {
                       handleAddToCart(product);
                     }}
                   >
-                    🛒 Add
+                    🛒 Add to Cart
                   </motion.button>
                 </div>
               </motion.div>
             ))
           ) : (
-            <div className="no-products">No plants found. Try different search terms!</div>
-          )}
-        </motion.div>
-
-        {/* Side Detail Panel */}
-        <AnimatePresence>
-          {selectedProduct && (
-            <motion.div
-              className="detail-panel"
-              initial={{ x: 400, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 400, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            <motion.div 
+              className="no-products"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
             >
-              <button 
-                className="close-panel"
-                onClick={() => setSelectedProduct(null)}
-              >
-                ✕
-              </button>
-
-              <motion.img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="detail-image"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.1 }}
-              />
-
-              <div className="detail-content">
-                <motion.h2
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.15 }}
-                >
-                  {selectedProduct.name}
-                </motion.h2>
-
-                <motion.p
-                  className="detail-category"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  {selectedProduct.category}
-                </motion.p>
-
-                <motion.div
-                  className="detail-description"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.25 }}
-                >
-                  {selectedProduct.description}
-                </motion.div>
-
-                <motion.div
-                  className="detail-specs"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <div className="spec-item">
-                    <span className="spec-label">Price</span>
-                    <span className="spec-value">₹{selectedProduct.price}</span>
-                  </div>
-                  <div className="spec-item">
-                    <span className="spec-label">Rating</span>
-                    <span className="spec-value">⭐ {selectedProduct.rating}/5</span>
-                  </div>
-                  <div className="spec-item">
-                    <span className="spec-label">Category</span>
-                    <span className="spec-value">{selectedProduct.category}</span>
-                  </div>
-                </motion.div>
-
-                <motion.button
-                  className="add-to-cart-btn"
-                  onClick={() => {
-                    handleAddToCart(selectedProduct);
-                    setSelectedProduct(null);
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.35 }}
-                >
-                  Add to Cart
-                </motion.button>
-              </div>
+              <p>🌱 No plants found matching your search!</p>
+              <p>Try different keywords or browse all plants</p>
             </motion.div>
           )}
-        </AnimatePresence>
-
-        {/* Backdrop */}
-        {selectedProduct && (
-          <motion.div
-            className="backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProduct(null)}
-          />
-        )}
+        </motion.div>
       </div>
+
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <ProductDetailModal 
+          product={selectedProduct} 
+          onClose={() => setSelectedProduct(null)} 
+        />
+      )}
     </div>
   );
 };

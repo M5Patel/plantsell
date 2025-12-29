@@ -1,48 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-*{
-   font-family: "Poppins";
+* {
+  font-family: "Poppins", sans-serif;
 }
-/* ==============================
-   SLIDER SECTION
-================================= */
+
+/* ============================================
+   CAROUSEL / SLIDER SECTION
+   ============================================ */
+
 .plant-carousel {
   width: 100%;
   position: relative;
+  margin-bottom: 60px;
 }
 
 .slider-img {
-  height: 560px; 
+  height: 560px;
   width: 100%;
   object-fit: cover;
-  filter: brightness(85%);
-  transition: transform 4s ease-in-out;
+  filter: brightness(90%);
+  transition: transform 5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-item.active .slider-img {
-  transform: scale(1.03);
+  transform: scale(1.05) rotate(0.5deg);
 }
 
 .carousel-caption {
-  top: 40%;
-  animation: fadeUp 1s ease;
+  top: 35%;
+  animation: fadeUp 0.8s ease-out;
 }
 
 .slide-title {
-  font-size: 3rem;
-  font-weight: 600;
-  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.6);
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.7);
   color: #ffffff;
- 
+  letter-spacing: -1px;
+  line-height: 1.2;
 }
 
 .slide-text {
-  font-size: 1rem;
-  margin-top: 8px;
-  color: #eaffea;
+  font-size: 1.15rem;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* ===================== FESTIVE SLIDES ==================== */
+
 .festive-slide {
   height: 560px;
   width: 100%;
@@ -62,24 +69,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 
 .christmas-slide {
   background: linear-gradient(135deg, #c41e3a 0%, #165b33 100%);
-}
-
-.christmas-slide::after {
-  content: '❄️ ❄️ ❄️ ❄️ ❄️';
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-  font-size: 2rem;
-  text-align: center;
-  animation: snowfall 8s linear infinite;
-  z-index: 0;
 }
 
 .summer-slide {
@@ -90,984 +85,698 @@
   background: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
 }
 
-.diwali-slide::after {
-  content: '🪔 🪔 🪔 🪔 🪔';
-  position: absolute;
-  top: 20px;
-  left: 0;
-  right: 0;
-  font-size: 2rem;
-  text-align: center;
-  animation: float 4s ease-in-out infinite;
-  z-index: 0;
-}
-
 .festive-content {
   position: relative;
   z-index: 2;
   text-align: center;
   color: white;
-  animation: festiveSlideIn 0.8s ease;
+  animation: slideInUp 0.8s ease-out;
 }
 
 .festive-btn {
   background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
-  padding: 14px 40px;
+  padding: 16px 42px;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.35s ease;
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.35);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 28px rgba(76, 175, 80, 0.4);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 15px;
+  letter-spacing: 1.2px;
+  margin-top: 20px;
   display: inline-block;
 }
 
 .festive-btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 35px rgba(76, 175, 80, 0.45);
+  box-shadow: 0 14px 40px rgba(76, 175, 80, 0.5);
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
 }
 
 .festive-btn:active {
   transform: translateY(-1px);
 }
 
-@keyframes snowfall {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-@keyframes festiveSlideIn {
+@keyframes slideInUp {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(40px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
-/* ===================== RESPONSIVE ==================== */
-@media (max-width: 768px) {
-  .slider-img {
-    height: 220px;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  .slide-title {
-    font-size: 1.3rem;
-  }
-  .slide-text {
-    font-size: 0.9rem;
-  }
-  .carousel-caption {
-    bottom: 10%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* ==============================
+/* ============================================
    BENEFITS SECTION
-================================= */
+   ============================================ */
+
 .benefits-section {
-  padding: 80px 0;
-  background: white;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9f1 100%);
+  margin-bottom: 60px;
+}
+
+.benefits-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 2.8rem;
+  font-weight: 800;
   text-align: center;
-  color: #166534;
-  margin-bottom: 20px;
+  color: #0d3d22;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
 }
 
 .section-subtitle {
   text-align: center;
-  font-size: 1.2rem;
-  color: #6b7280;
-  margin-bottom: 40px;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 50px;
+  font-weight: 500;
 }
 
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
 }
 
 .benefit-card {
   background: white;
-  padding: 40px 30px;
-  border-radius: 20px;
+  padding: 35px;
+  border-radius: 14px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: 0.3s ease;
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
 }
 
 .benefit-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
+  border-color: #d1f9c5;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9f1 100%);
 }
 
 .benefit-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  display: inline-block;
 }
 
+.benefit-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0d3d22;
+  margin-bottom: 12px;
+}
 
-/* ============================== PRODUCT SECTION ================================= */
+.benefit-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
 
-/* SECTION */
+/* ============================================
+   PRODUCTS SECTION
+   ============================================ */
+
 .products-section {
-  background: #ffffff;
-  padding: 40px 20px;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f0f9f1 0%, #ffffff 100%);
+  margin-bottom: 60px;
 }
 
-/* HEADING */
+.products-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .hh1 {
+  font-size: 2.8rem;
+  font-weight: 800;
   text-align: center;
-  margin-bottom: 35px;
-  color: #003615;
-  font-size: 40px;
+  color: #0d3d22;
+  margin-bottom: 50px !important;
+  letter-spacing: -1px;
 }
 
-/* GRID */
 .produc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 25px;
-  max-width: 1200px;
-  margin: auto;
 }
 
-/* CARD */
 .product-card {
-  background: #fff;
-  border: 1px solid #e1e1e1;
+  background: white;
   border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.35s ease; /* 🔒 YOUR ANIMATION KEPT */
-}
-
-/* YOUR HOVER ANIMATION — UNCHANGED */
-.product-card:hover {
-  transform: scale(0.9);
-  outline: 2px solid #a0d48e;
-  cursor: pointer;
-}
-
-/* IMAGE CONTAINER (FIX) */
-.img-box {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: #f5f5f5;
-  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 15px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
 }
 
-/* IMAGE */
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
+  border-color: #d1f9c5;
+}
+
+.img-box {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f0f9f1 0%, #ffffff 100%);
+  height: 220px;
+}
+
 .img-box img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* TEXT */
+.product-card:hover .img-box img {
+  transform: scale(1.1) rotate(1deg);
+}
+
 .product-card h3 {
-  font-size: 20px;
-  color: #003615;
-  margin-bottom: 8px;
+  padding: 18px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0d3d22;
+  margin: 0;
 }
 
 .product-card p {
-  font-size: 15px;
-  color: #555;
-  line-height: 1.4;
+  padding: 0 18px 18px;
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
 }
 
-/* TABLET */
-@media (max-width: 768px) {
-  .hh1 {
-    font-size: 32px;
-  }
+/* ============================================
+   WHY US SECTION
+   ============================================ */
+
+.why-us-section {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9f1 100%);
+  margin-bottom: 60px;
 }
 
-/* MOBILE */
-@media (max-width: 480px) {
-  .hh1 {
-    font-size: 26px;
-  }
-
-  .product-card {
-    padding: 16px;
-  }
-
-  /* Slider responsive */
-  .slider-img {
-    height: 250px !important;
-  }
-
-  .slide-title {
-    font-size: 1.2rem !important;
-  }
-
-  .slide-text {
-    font-size: 0.8rem !important;
-  }
-
-  .carousel-caption {
-    bottom: 20px !important;
-  }
-
-  /* Benefits section mobile */
-  .benefits-grid {
-    gap: 15px;
-  }
-
-  .benefit-card {
-    padding: 20px 15px;
-  }
-
-  .benefit-card h3 {
-    font-size: 1rem;
-  }
-
-  .benefit-card p {
-    font-size: 0.85rem;
-  }
-
-  /* Products section */
-  .produc {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .product-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .product-card p {
-    font-size: 0.9rem;
-  }
-
-  /* Why us mobile */
-  .why-us-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .why-us-card {
-    padding: 20px 15px;
-  }
-
-  /* Tips section mobile */
-  .tips-flex {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .tip-card {
-    max-width: 100%;
-  }
-
-  /* CTA section mobile */
-  .cta-section {
-    padding: 60px 20px;
-  }
-
-  .cta-section h2 {
-    font-size: 1.8rem;
-  }
-
-  /* Footer mobile */
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+.why-us-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
+.why-us-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+}
 
+.why-us-card {
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 6px 22px rgba(76, 175, 80, 0.1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
 
-/* ==============================
-   FEATURED PLANTS (UPDATED)
-================================= */
+.why-us-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 45px rgba(76, 175, 80, 0.2);
+  border-color: #d1f9c5;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9f1 100%);
+}
+
+.why-icon {
+  font-size: 4rem;
+  margin-bottom: 18px;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.why-us-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d3d22;
+  margin-bottom: 12px;
+}
+
+.why-us-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ============================================
+   FEATURED SECTION
+   ============================================ */
+
 .featured-section {
-  padding: 80px 0;
-  background: #f6fff8;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f0f9f1 0%, #ffffff 100%);
+  margin-bottom: 60px;
+}
+
+.featured-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .plants-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  margin-top: 40px;
 }
 
-/* Clean Card */
-.custom-plant-card {
-  background: #fff;
-  border-radius: 20px;
+.plant-card {
+  background: white;
+  border-radius: 12px;
   overflow: hidden;
-  transition: 0.3s ease;
-  position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .custom-plant-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 45px rgba(76, 175, 80, 0.2);
+  border-color: #d1f9c5;
 }
 
-/* Image Wrapper */
-.custom-plant-card .plant-image {
-  width: 100%;
-  height: 220px;
+.plant-image {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #f0f9f1 0%, #ffffff 100%);
+  height: 280px;
 }
 
-/* Base images */
-.custom-plant-card .plant-image img {
+.img-default,
+.img-hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-hover {
   position: absolute;
   top: 0;
-  left: 0;
-}
-
-/* Hover switching */
-.img-default {
-  opacity: 1;
-}
-.img-hover {
   opacity: 0;
 }
-.custom-plant-card:hover .img-default {
-  opacity: 0;
-}
-.custom-plant-card:hover .img-hover {
+
+.plant-card:hover .img-hover {
   opacity: 1;
+  transform: scale(1.1);
 }
-
-/* Add Button animation */
-.hover-add-btn {
-  width: 80%;
-  padding: 10px;
-  background: #16a34a;
-  color: white;
-  border: none;
-  font-weight: 600;
-  border-radius: 40px;
-  cursor: pointer;
-  display: block;
-  margin: 20px auto 25px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.3s ease;
-}
-
-.custom-plant-card:hover .hover-add-btn {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 
 .plant-info {
-  text-align: center;
-  padding: 20px 10px 10px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .plant-info h3 {
-  font-size: 1.4rem;
-  color: #1f2937;
-  margin-bottom: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0d3d22;
+  margin: 0;
+}
+
+.rating {
+  font-size: 14px;
+  color: #ff6b35;
 }
 
 .price {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #16a34a;
+  font-weight: 800;
+  color: #065f46;
+  margin: 8px 0 0 0;
 }
 
-/* ==============================
+.hover-add-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+  font-family: inherit;
+  margin-top: auto;
+}
+
+.hover-add-btn:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ============================================
    REVIEWS SECTION
-================================= */
+   ============================================ */
 
 .reviews-section {
-  padding: 80px 0;
-  background: white;
-  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9f1 100%);
+  margin-bottom: 60px;
 }
 
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 40px;
+.reviews-section {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
-  justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .review-card {
   background: white;
   padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s ease;
-  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
 }
 
 .review-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(76, 175, 80, 0.15);
+  border-color: #d1f9c5;
 }
 
 .stars {
-  color: #fbbf24;
-  font-size: 1.3rem;
+  font-size: 16px;
   margin-bottom: 12px;
+  display: block;
 }
 
 .review-card p {
-  font-size: 1rem;
-  color: #4b5563;
-  margin-bottom: 10px;
-  line-height: 1.5;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 12px 0;
 }
 
 .review-card h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #1f2937;
-  margin-top: 5px;
-}
-
-/*===============*/
-/* -- parllax -- */ 
-/*===============*/
-
-.parent{
-  padding: 70px 0px 0px 0px;
-}
-
-.parallax {
-  height: 70vh;
-  background-image: url("../img/wind.png"); 
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.parallax::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
-  z-index: 1;
-}
-
-.parallax-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-}
-
-/* ==============================
-   WHY US SECTION
-================================= */
-
-.why-us-section {
-  padding: 80px 0;
-}
-
-.section-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #065f46;
-  margin-bottom: 50px;
-}
-
-.why-us-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  justify-content: center;
-}
-
-.why-us-card {
-  background: rgba(255, 255, 255, 0.75);
-  padding: 35px 25px;
-  border-radius: 20px;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: 0.35s ease;
-  text-align: center;
-}
-
-.why-us-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
-}
-
-.why-icon {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  color: #059669;
-  transition: 0.3s;
-}
-
-.why-us-card:hover .why-icon {
-  transform: scale(1.15);
-}
-
-.why-us-card h3 {
-  font-size: 1.4rem;
-  color: #065f46;
-  margin-bottom: 12px;
+  color: #4caf50;
+  font-size: 0.9rem;
+  margin: 12px 0 0 0;
   font-weight: 700;
 }
 
-.why-us-card p {
-  color: #4b5563;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-
-/* ==============================
-   PLANT CARE TIPS
-================================= */
+/* ============================================
+   CARE TIPS SECTION
+   ============================================ */
 
 .care-tips {
-  padding: 80px 40px;
-  text-align: center;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f9f8 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.care-tips::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -100px;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(76, 175, 80, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  z-index: 0;
-}
-
-.care-tips::after {
-  content: '';
-  position: absolute;
-  bottom: -50px;
-  left: -100px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(76, 175, 80, 0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  z-index: 0;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f0f9f1 0%, #ffffff 100%);
+  margin-bottom: 60px;
 }
 
 .care-tips h2 {
   font-size: 2.8rem;
   font-weight: 800;
-  color: #065f46;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.care-tips h2::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
-  margin: 15px auto 0;
-  border-radius: 2px;
+  text-align: center;
+  color: #0d3d22;
+  margin-bottom: 50px;
+  letter-spacing: -1px;
 }
 
 .tips-flex {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .tip-card {
-  max-width: 380px;
-  padding: 35px;
-  border-radius: 18px;
   background: white;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  text-align: center;
-  border: 2px solid rgba(76, 175, 80, 0.1);
-  position: relative;
+  border-radius: 12px;
   overflow: hidden;
-}
-
-.tip-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
-  transform-origin: left;
-}
-
-.tip-card:hover::before {
-  transform: scaleX(1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tip-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 16px 45px rgba(76, 175, 80, 0.15);
-  border-color: #4caf50;
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
 }
 
 .tip-image {
-  width: 100%;
-  height: 220px;
   overflow: hidden;
-  border-radius: 14px;
-  margin-bottom: 22px;
-  position: relative;
-  background: linear-gradient(135deg, #f5f9f8 0%, #e8f5e9 100%);
+  height: 220px;
 }
 
 .tip-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s ease;
 }
 
 .tip-card:hover .tip-image img {
-  transform: scale(1.15) rotate(2deg);
+  transform: scale(1.1);
 }
 
 .tip-card h3 {
-  font-size: 1.4rem;
-  color: #065f46;
-  margin-bottom: 12px;
+  padding: 20px;
+  font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.tip-card p {
-  font-size: 0.95rem;
-  color: #6b7280;
-  line-height: 1.7;
+  color: #0d3d22;
   margin: 0;
 }
 
+.tip-card p {
+  padding: 0 20px 20px;
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
 
-/* ==============================
+/* ============================================
    CTA SECTION
-================================= */
+   ============================================ */
+
 .cta-section {
-  padding: 100px 0;
-  background: white;
-  text-align: center;
-}
-
-.cta-section h2 {
-  font-size: 2.5rem;
-  color: #166534;
-}
-
-.cta-btn {
-  padding: 14px 40px;
-  background: #16a34a;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
-  font-weight: bold;
-  border-radius: 40px;
-  border: none;
-  transition: 0.3s ease;
-}
-
-.cta-btn:hover {
-  transform: scale(1.05);
-  background: #0f7c37;
-}
-
-/* ==============================
-   FOOTER
-================================= */
-
-footer {
-  background: #07190b;
-  color: white;
-  padding: 60px 20px 30px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.footer-logo {
-  max-width: 250px;
-}
-
-.footer-logo img {
-  width: 120px;
-  filter: drop-shadow(0 0 8px rgba(160, 212, 142, 0.3));
-}
-
-.footer-section h3 {
-  color: #a0d48e;
-  margin-bottom: 12px;
-  font-size: 1.2rem;
-}
-
-.footer-section a {
-  display: block;
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 6px;
-  text-decoration: none;
-  transition: 0.3s ease;
-  font-size: 0.95rem;
-}
-
-.footer-section a:hover {
-  color: #a0d48e;
-  text-shadow: 0 0 8px rgba(250, 250, 250, 0.38),
-               0 0 15px rgb(0, 255, 4);
-}
-
-
-.footer-section p {
-  color: rgba(255,255,255,0.75);
-  margin-top: 6px;
-  font-size: 0.95rem;
-}
-
-.footer-divider {
-  width: 100%;
-  height: 1px;
-  background: rgba(255,255,255,0.15);
-  margin: 40px 0 20px;
-}
-
-.footer-bottom {
   text-align: center;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.6);
-}
-
-
-/* ==============================
-   ANIMATIONS
-================================= */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 10px rgba(76, 175, 80, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-/* Enhance benefit cards with animation */
-.benefit-card {
-  animation: slideInLeft 0.6s ease forwards;
-  opacity: 0;
-}
-
-.benefit-card:nth-child(1) { animation-delay: 0.1s; }
-.benefit-card:nth-child(2) { animation-delay: 0.2s; }
-.benefit-card:nth-child(3) { animation-delay: 0.3s; }
-.benefit-card:nth-child(4) { animation-delay: 0.4s; }
-
-.benefit-icon {
-  animation: float 2s ease-in-out infinite;
-}
-
-/* Enhance product cards */
-.product-card {
-  animation: scaleIn 0.5s ease forwards;
-  opacity: 0;
-}
-
-.product-card:nth-child(1) { animation-delay: 0.1s; }
-.product-card:nth-child(2) { animation-delay: 0.2s; }
-.product-card:nth-child(3) { animation-delay: 0.3s; }
-.product-card:nth-child(4) { animation-delay: 0.4s; }
-
-/* Why us cards */
-.why-us-card {
-  animation: fadeUp 0.6s ease forwards;
-  opacity: 0;
-}
-
-.why-us-card:nth-child(1) { animation-delay: 0.1s; }
-.why-us-card:nth-child(2) { animation-delay: 0.2s; }
-.why-us-card:nth-child(3) { animation-delay: 0.3s; }
-
-/* Tips cards */
-.tip-card {
-  animation: slideInRight 0.6s ease forwards;
-  opacity: 0;
-}
-
-.tip-card:nth-child(1) { animation-delay: 0.1s; }
-.tip-card:nth-child(2) { animation-delay: 0.2s; }
-.tip-card:nth-child(3) { animation-delay: 0.3s; }
-
-/* Review cards */
-.review-card {
-  animation: fadeUp 0.6s ease forwards;
-  opacity: 0;
-}
-
-.review-card:nth-child(1) { animation-delay: 0.1s; }
-.review-card:nth-child(2) { animation-delay: 0.2s; }
-.review-card:nth-child(3) { animation-delay: 0.3s; }
-
-/* Slider images smooth animation */
-.slider-img {
-  animation: float 3s ease-in-out infinite;
-}
-
-.carousel-item.active .slider-img {
-  animation: none;
-}
-
-/* CTA button animation */
-.cta-btn {
-  animation: bounce 2s ease-in-out infinite;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
-/* Footer fade in */
-footer {
-  animation: fadeUp 0.8s ease;
-}
-
-/* Parallax effect enhancement */
-.parallax {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* Global hover animations for smooth transitions */
-*:has(:hover) {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Add ripple effect to buttons */
-button {
+  margin-bottom: 60px;
   position: relative;
   overflow: hidden;
 }
 
-button::before {
+.cta-section::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-button:active::before {
-  width: 300px;
-  height: 300px;
+.cta-section h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -1px;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+.cta-section p {
+  font-size: 1.15rem;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+  opacity: 0.95;
 }
 
-/* Enhance transitions */
-a, button, input, select, textarea {
-  transition: all 0.3s ease;
+.cta-btn {
+  background: white;
+  color: #4caf50;
+  border: none;
+  padding: 16px 44px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  position: relative;
+  z-index: 1;
 }
+
+.cta-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  background: #f0f9f1;
+  color: #045a3f;
+}
+
+.cta-btn:active {
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
 
 @media (max-width: 768px) {
+  .slider-img {
+    height: 280px;
+  }
+
+  .slide-title {
+    font-size: 1.8rem;
+  }
+
+  .slide-text {
+    font-size: 0.9rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
   .benefit-card,
-  .product-card,
   .why-us-card,
-  .tip-card,
   .review-card {
-    animation-delay: 0s !important;
+    padding: 25px;
+  }
+
+  .why-icon {
+    font-size: 3rem;
+  }
+
+  .benefit-icon {
+    font-size: 2.8rem;
+  }
+
+  .care-tips h2,
+  .hh1 {
+    font-size: 2rem;
+  }
+
+  .tips-flex,
+  .produc,
+  .plants-grid,
+  .benefits-grid,
+  .reviews-grid,
+  .why-us-grid {
+    gap: 20px;
+  }
+
+  .cta-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-img {
+    height: 200px;
+  }
+
+  .slide-title {
+    font-size: 1.3rem;
+  }
+
+  .slide-text {
+    font-size: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  .benefit-card,
+  .why-us-card,
+  .review-card {
+    padding: 18px;
+  }
+
+  .care-tips h2,
+  .hh1,
+  .cta-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  .cta-btn,
+  .festive-btn {
+    padding: 12px 28px;
+    font-size: 0.9rem;
+  }
+
+  .tips-flex,
+  .produc,
+  .plants-grid,
+  .benefits-grid,
+  .reviews-grid,
+  .why-us-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

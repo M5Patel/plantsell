@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
@@ -16,6 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import Logo from "../img/m5plants.jpg";
+import { plantProducts } from "../data/plantData";
 
 const pages = [
   { name: "Home", path: "/" },

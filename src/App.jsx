@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider, useCart } from './context/CartContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import ShopProducts from './pages/ShopProducts';
@@ -39,6 +40,7 @@ function AppContent() {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </motion.div>
+      <ScrollToTop />
       <Footer />
     </>
   );
