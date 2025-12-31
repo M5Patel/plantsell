@@ -1,42 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Carousel from "react-bootstrap/Carousel";
+import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "../pages/Home.css";
 import { useCart } from "../context/CartContext";
-import p1 from "../img/palm.jpg";
-import p2 from "../img/plant1.jpg";
-import p3 from "../img/waterwia.jpg";
-import q1 from "../img/q1.jpg";
-import q2 from "../img/q2.jpg";
-import q3 from "../img/q3.jpg";
-import q4 from "../img/q4.jpg";
-import q5 from "../img/q5.jpg";
-import q6 from "../img/q6.jpg";
-import Logo from "../img/m5plants.jpg";
+import { plantProducts, plantCategories } from "../data/plantData";
+import "../pages/Home.css";
+import {
+  Container,
+  Button,
+  Chip,
+} from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, duration: 0.3 },
+    transition: { staggerChildren: 0.08, duration: 0.3 },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const products = [
-  { id: 1, name: "Areca Palm", image: p1, price: 399, rating: "4.5" },
-  { id: 2, name: "Money Plant", image: p2, price: 299, rating: "4.8" },
-  { id: 3, name: "Syngonium", image: p3, price: 499, rating: "4.9" },
-];
+const getFeaturedProducts = () => {
+  const allProducts = Object.values(plantProducts).flat();
+  return allProducts
+    .sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
+    .slice(0, 6);
+};
 
 const Home = () => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const featuredProducts = getFeaturedProducts();
 
   useEffect(() => {
     AOS.init({
@@ -47,208 +50,114 @@ const Home = () => {
     return () => AOS.refresh();
   }, []);
 
+  const slides = [
+    {
+      title: "Transform Your Space 🌿",
+      subtitle: "Discover Premium Plants for Your Home",
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      cta: "Shop Now",
+    },
+    {
+      title: "Fresh & Healthy Plants ✨",
+      subtitle: "Guaranteed Quality with Expert Care Tips",
+      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      cta: "Explore Collection",
+    },
+    {
+      title: "Limited Time Offers 🎁",
+      subtitle: "Up to 40% off on Premium Plants",
+      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      cta: "Get Deals",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   const handleAddToCart = (product) => {
     addToCart(product);
-    alert(`${product.name} added to cart! 🛒`);
+    const notification = document.createElement("div");
+    notification.className = "cart-notification";
+    notification.textContent = `✅ ${product.name} added to cart!`;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
   };
 
   return (
-    <>
-      {/* ---------------- SLIDER WITH ANIMATION ---------------- */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Carousel
-          fade
-          interval={1500}
-          controls={true}
-          indicators={true}
-          pause="hover"
-          className="plant-carousel"
+    <div className="home-container">
+      {/* ====== HERO SLIDER ====== */}
+      <section className="hero-section">
+        <motion.div
+          className="hero-slides"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          <Carousel.Item>
-            <img
-              className="d-block w-100 slider-img"
-              src={p1}
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <motion.h2
-                className="slide-title"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                Beautiful Indoor Plants
-              </motion.h2>
-              <motion.p
-                className="slide-text"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Bring fresh air and positive vibes to your home.
-              </motion.p>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100 slider-img"
-              src={p2}
-              alt="Second slide"
-            />
-            <Carousel.Caption>
-              <motion.h2
-                className="slide-title"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                Nature in Every Corner
-              </motion.h2>
-              <motion.p
-                className="slide-text"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Choose from our exclusive green collection.
-              </motion.p>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="d-block w-100 slider-img"
-              src={p3}
-              alt="Third slide"
-            />
-            <Carousel.Caption>
-              <motion.h2
-                className="slide-title"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                Grow Happiness
-              </motion.h2>
-              <motion.p
-                className="slide-text"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Plants make your home peaceful and calm.
-              </motion.p>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <div className="festive-slide christmas-slide">
-              <div className="festive-content">
-                <motion.h2
-                  className="slide-title"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  🎄 Holiday Season Specials! 🎄
-                </motion.h2>
-                <motion.p
-                  className="slide-text"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  Get 30% OFF on all Plants this Christmas!
-                </motion.p>
-                <motion.button
-                  className="festive-btn"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Shop Now
-                </motion.button>
+          {slides.map((slide, idx) => (
+            <motion.div
+              key={idx}
+              className="hero-slide"
+              style={{ background: slide.gradient }}
+              initial={{ opacity: 0, x: 100 }}
+              animate={currentSlide === idx ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="hero-overlay">
+                <div className="hero-content">
+                  <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={currentSlide === idx ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
+                    className="hero-title"
+                  >
+                    {slide.title}
+                  </motion.h1>
+                  <motion.p
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={currentSlide === idx ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    className="hero-subtitle"
+                  >
+                    {slide.subtitle}
+                  </motion.p>
+                  <motion.button
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={currentSlide === idx ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ delay: 0.6, duration: 0.6 }}
+                    className="hero-btn"
+                    onClick={() => navigate("/shop")}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {slide.cta} →
+                  </motion.button>
+                </div>
               </div>
-            </div>
-          </Carousel.Item>
+            </motion.div>
+          ))}
+        </motion.div>
 
-          <Carousel.Item>
-            <div className="festive-slide summer-slide">
-              <div className="festive-content">
-                <motion.h2
-                  className="slide-title"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  ☀️ Summer Offer! ☀️
-                </motion.h2>
-                <motion.p
-                  className="slide-text"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  Perfect time to refresh your space with vibrant greens!
-                </motion.p>
-                <motion.button
-                  className="festive-btn"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Explore Collection
-                </motion.button>
-              </div>
-            </div>
-          </Carousel.Item>
+        {/* Slide Indicators */}
+        <div className="slide-indicators">
+          {slides.map((_, idx) => (
+            <motion.button
+              key={idx}
+              className={`indicator ${currentSlide === idx ? "active" : ""}`}
+              onClick={() => setCurrentSlide(idx)}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            />
+          ))}
+        </div>
+      </section>
 
-          <Carousel.Item>
-            <div className="festive-slide diwali-slide">
-              <div className="festive-content">
-                <motion.h2
-                  className="slide-title"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  ✨ Festival of Lights ✨
-                </motion.h2>
-                <motion.p
-                  className="slide-text"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  Brighten your home with beautiful plants & 25% discount!
-                </motion.p>
-                <motion.button
-                  className="festive-btn"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  View Deals
-                </motion.button>
-              </div>
-            </div>
-          </Carousel.Item>
-        </Carousel>
-      </motion.div>
-
-      <section className="benefits-section" data-aos="fade-up">
-        <div className="container">
+      {/* ====== BENEFITS SECTION ====== */}
+      <section className="benefits-section">
+        <Container maxWidth="lg">
           <motion.h2
             className="section-title"
             initial={{ opacity: 0, y: 30 }}
@@ -256,8 +165,9 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            🌿 Why Choose Plants?
+            Why Choose Plants?
           </motion.h2>
+
           <motion.div
             className="benefits-grid"
             variants={containerVariants}
@@ -265,330 +175,322 @@ const Home = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div className="benefit-card" variants={itemVariants}>
-              <div className="benefit-icon">💧</div>
-              <h3>Air Purification</h3>
-              <p>Remove toxins naturally</p>
-            </motion.div>
-            <motion.div className="benefit-card" variants={itemVariants}>
-              <div className="benefit-icon">☀️</div>
-              <h3>Mood Booster</h3>
-              <p>Increase happiness levels</p>
-            </motion.div>
-            <motion.div className="benefit-card" variants={itemVariants}>
-              <div className="benefit-icon">❤️</div>
-              <h3>Stress Relief</h3>
-              <p>Create calming atmosphere</p>
-            </motion.div>
-            <motion.div className="benefit-card" variants={itemVariants}>
-              <div className="benefit-icon">🍃</div>
-              <h3>Better Sleep</h3>
-              <p>Improve air quality at night</p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ---------------- PRODUCTS SECTION WITH ANIMATION ---------------- */}
-    <motion.div
-      className="products-section"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <motion.h1
-        className="hh1"
-        data-aos="zoom-in"
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        ⭐Products Section⭐
-      </motion.h1>
-
-      <motion.div
-        className="produc"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <motion.div className="product-card" variants={itemVariants}>
-          <motion.div
-            className="img-box"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <img src={q1} alt="Best Selling Pack" />
-          </motion.div>
-          <h3>Best Selling Pack</h3>
-          <p>Get 50% off on our most popular plants</p>
-        </motion.div>
-
-        <motion.div className="product-card" variants={itemVariants}>
-          <motion.div
-            className="img-box"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <img src={q2} alt="Top Rated Collection" />
-          </motion.div>
-          <h3>Top Rated Collection</h3>
-          <p>Get 40% off on customer favorites</p>
-        </motion.div>
-
-        <motion.div className="product-card" variants={itemVariants}>
-          <motion.div
-            className="img-box"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <img src={q3} alt="New Arrivals" />
-          </motion.div>
-          <h3>New Arrivals</h3>
-          <p>Flat 25% off on fresh arrivals</p>
-        </motion.div>
-
-        <motion.div className="product-card" variants={itemVariants}>
-          <motion.div
-            className="img-box"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <img src={q4} alt="Trending Plants" />
-          </motion.div>
-          <h3>Trending Plants</h3>
-          <p>BOGO Offer on trending plants</p>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-
-
-
-      {/* WHY US */}
-      <section className="why-us-section" data-aos="fade-up">
-        <div className="container">
-          <motion.h2
-            className="section-title"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            ✨ Why Choose Us?
-          </motion.h2>
-
-          <motion.div
-            className="why-us-grid"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.div className="why-us-card" variants={itemVariants}>
-              <div className="why-icon">🌱</div>
-              <h3>Quality Guaranteed</h3>
-              <p>100% healthy plants</p>
-            </motion.div>
-
-            <motion.div className="why-us-card" variants={itemVariants}>
-              <div className="why-icon">⚡</div>
-              <h3>Fast Delivery</h3>
-              <p>Within 3–5 days</p>
-            </motion.div>
-
-            <motion.div className="why-us-card" variants={itemVariants}>
-              <div className="why-icon">📘</div>
-              <h3>Expert Care Tips</h3>
-              <p>Free guidance included</p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FEATURED PLANTS WITH CART */}
-      <section className="featured-section" data-aos="fade-up">
-        <div className="container">
-          <motion.h2
-            className="section-title"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            🌱 Featured Plants
-          </motion.h2>
-          <motion.p
-            className="section-subtitle"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Discover our best-selling plants with amazing quality
-          </motion.p>
-
-          <motion.div
-            className="plants-grid"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {products.map((product) => (
+            {[
+              { icon: "🌍", title: "100% Authentic", desc: "Genuine plants sourced directly" },
+              { icon: "🚚", title: "Free Shipping", desc: "Orders over ₹500" },
+              { icon: "✅", title: "Healthy Plants", desc: "Quality guaranteed or refund" },
+              { icon: "💬", title: "24/7 Support", desc: "Expert care guidance" },
+            ].map((benefit, idx) => (
               <motion.div
-                key={product.id}
-                className="plant-card custom-plant-card"
+                key={idx}
+                className="benefit-card"
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileHover={{ y: -8, boxShadow: "0 12px 30px rgba(76, 175, 80, 0.3)" }}
               >
-                <div className="plant-image">
-                  <img src={product.image} className="img-default" alt={product.name} />
-                  <img src={p2} className="img-hover" alt={product.name} />
-                </div>
-                <div className="plant-info">
-                  <h3>{product.name}</h3>
-                  <div className="rating">⭐⭐⭐⭐</div>
-                  <span className="price">₹{product.price}</span>
-                </div>
-                <motion.button
-                  className="add-btn hover-add-btn"
-                  whileHover={{ scale: 1.05, backgroundColor: "#45a049" }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  🛒 Add to Cart
-                </motion.button>
+                <div className="benefit-icon">{benefit.icon}</div>
+                <h3>{benefit.title}</h3>
+                <p>{benefit.desc}</p>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </Container>
       </section>
 
-      {/* REVIEWS */}
-      <section className="reviews-section" data-aos="fade-up">
-        <motion.h2
-          className="section-title"
+      {/* ====== FEATURED PLANTS ====== */}
+      <section className="featured-plants-section">
+        <Container maxWidth="lg">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="section-title">Featured Plants</h2>
+            <p className="section-subtitle">Our best-selling premium collection</p>
+          </motion.div>
+
+          <motion.div
+            className="featured-grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {featuredProducts.map((product) => (
+              <motion.div
+                key={product.id}
+                className="featured-card"
+                variants={itemVariants}
+                whileHover={{ y: -12 }}
+              >
+                <div className="product-image-container">
+                  <motion.img
+                    src={product.image}
+                    alt={product.name}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  />
+                  <motion.button
+                    className="quick-view-btn"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => navigate(`/shop?search=${product.name}`)}
+                  >
+                    Quick View
+                  </motion.button>
+                  <div className="product-badge">⭐ {product.rating}</div>
+                </div>
+
+                <div className="product-details">
+                  <h3>{product.name}</h3>
+                  <div className="product-rating">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className={i < Math.floor(product.rating) ? "star-full" : "star-empty"}>
+                        ★
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="price-section">
+                    <span className="current-price">₹{product.price}</span>
+                    <span className="original-price">₹{Math.round(product.price * 1.4)}</span>
+                    <span className="discount">
+                      {Math.round(((product.price * 1.4 - product.price) / (product.price * 1.4)) * 100)}%
+                    </span>
+                  </div>
+
+                  <div className="info-tags">
+                    <Chip
+                      size="small"
+                      icon={<LocalShippingIcon />}
+                      label="Free Delivery"
+                      variant="outlined"
+                    />
+                    <Chip
+                      size="small"
+                      icon={<VerifiedIcon />}
+                      label="Verified"
+                      variant="outlined"
+                    />
+                  </div>
+
+                  <motion.button
+                    className="add-to-cart-btn"
+                    onClick={() => handleAddToCart(product)}
+                    whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(76, 175, 80, 0.4)" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ShoppingCartIcon /> Add to Cart
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="view-all-section"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <Button
+              variant="contained"
+              size="large"
+              onClick={() => navigate("/shop")}
+              sx={{
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                padding: "15px 50px",
+                fontSize: "16px",
+                fontWeight: "bold",
+              }}
+            >
+              View All Products
+            </Button>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ====== CATEGORIES SECTION ====== */}
+      <section className="categories-section">
+        <Container maxWidth="lg">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Shop by Category
+          </motion.h2>
+
+          <motion.div
+            className="categories-grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {plantCategories.map((category) => (
+              <motion.div
+                key={category.id}
+                className="category-card"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, boxShadow: "0 15px 40px rgba(76, 175, 80, 0.3)" }}
+              >
+                <motion.img src={category.image} alt={category.name} whileHover={{ scale: 1.1 }} />
+                <div className="category-overlay">
+                  <h3>{category.name}</h3>
+                  <p>{category.description}</p>
+                  <motion.button
+                    onClick={() => navigate(`/shop?category=${category.slug}`)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Explore →
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ====== TESTIMONIALS ====== */}
+      <section className="testimonials-section">
+        <Container maxWidth="lg">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            What Our Customers Say
+          </motion.h2>
+
+          <motion.div
+            className="testimonials-grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                name: "Priya Sharma",
+                rating: 5,
+                text: "Amazing quality plants! My home looks so green and fresh now. Excellent delivery and packaging!",
+                avatar: "👩",
+              },
+              {
+                name: "Rahul Kumar",
+                rating: 5,
+                text: "Super fast delivery and healthy plants. Customer support is very helpful with care tips.",
+                avatar: "👨",
+              },
+              {
+                name: "Anita Patel",
+                rating: 4,
+                text: "Great variety and competitive prices. The plants are thriving beautifully in my apartment.",
+                avatar: "👩‍🦱",
+              },
+              {
+                name: "Vikram Singh",
+                rating: 5,
+                text: "Best place to buy plants online! Received 3 plants and all are perfectly healthy.",
+                avatar: "👨‍💼",
+              },
+            ].map((testimonial, idx) => (
+              <motion.div
+                key={idx}
+                className="testimonial-card"
+                variants={itemVariants}
+                whileHover={{ y: -8 }}
+              >
+                <div className="testimonial-header">
+                  <div className="avatar">{testimonial.avatar}</div>
+                  <div className="testimonial-info">
+                    <h4>{testimonial.name}</h4>
+                    <div className="stars">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className={i < testimonial.rating ? "star-filled" : ""}>
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p>{testimonial.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ====== CARE TIPS ====== */}
+      <section className="care-tips-section">
+        <Container maxWidth="lg">
+          <motion.h2
+            className="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Plant Care Tips
+          </motion.h2>
+
+          <motion.div
+            className="tips-grid"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              { icon: "💧", title: "Watering", desc: "Check soil moisture daily. Water when top inch feels dry." },
+              { icon: "☀️", title: "Sunlight", desc: "Most plants need 6-8 hours of indirect sunlight daily." },
+              { icon: "🌡️", title: "Temperature", desc: "Keep plants between 65-75°F for optimal growth." },
+              { icon: "✨", title: "Humidity", desc: "Mist leaves weekly for tropical and flowering plants." },
+            ].map((tip, idx) => (
+              <motion.div
+                key={idx}
+                className="tip-card"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="tip-icon">{tip.icon}</div>
+                <h3>{tip.title}</h3>
+                <p>{tip.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ====== CTA SECTION ====== */}
+      <section className="cta-section">
+        <motion.div
+          className="cta-content"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          💬 What Our Customers Say
-        </motion.h2>
-        <motion.div
-          className="reviews-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div className="review-card" variants={itemVariants}>
-            <div className="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Best quality plants! My home feels so fresh now."</p>
-            <h4>- Priya Sharma</h4>
-          </motion.div>
-          <motion.div className="review-card" variants={itemVariants}>
-            <div className="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Fast delivery and healthy plants. Highly recommend!"</p>
-            <h4>- Rahul Verma</h4>
-          </motion.div>
-          <motion.div className="review-card" variants={itemVariants}>
-            <div className="stars">⭐⭐⭐⭐</div>
-            <p>"Great customer service and beautiful packaging."</p>
-            <h4>- Anita Patel</h4>
-          </motion.div>
+          <h2>Ready to Green Your Space?</h2>
+          <p>Join thousands of happy plant parents and transform your home today!</p>
+          <motion.button
+            className="cta-btn"
+            onClick={() => navigate("/shop")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Start Shopping Now 🌿
+          </motion.button>
         </motion.div>
       </section>
-
-      {/* CARE TIPS */}
-      <motion.div
-        className="care-tips"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          🌿 Plant Care Tips
-        </motion.h2>
-
-        <motion.div
-          className="tips-flex"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.div className="tip-card" variants={itemVariants}>
-            <div className="tip-image">
-              <img src={p1} alt="" />
-            </div>
-            <h3>Watering Wisdom</h3>
-            <p>Check soil moisture regularly.</p>
-          </motion.div>
-
-          <motion.div className="tip-card" variants={itemVariants}>
-            <div className="tip-image">
-              <img src={p3} alt="" />
-            </div>
-            <h3>Light Requirements</h3>
-            <p>Bright, indirect light is ideal.</p>
-          </motion.div>
-
-          <motion.div className="tip-card" variants={itemVariants}>
-            <div className="tip-image">
-              <img src={p2} alt="" />
-            </div>
-            <h3>Humidity Levels</h3>
-            <p>Use humidifier for tropical plants.</p>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
-      {/* CTA */}
-      <section className="cta-section" data-aos="zoom-in">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Ready to Green Your Space? 🌿
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Start your plant journey and transform your home!
-        </motion.p>
-        <motion.button
-          className="cta-btn"
-          whileHover={{ scale: 1.08, boxShadow: "0 8px 25px rgba(76, 175, 80, 0.4)" }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          Browse Collection
-        </motion.button>
-      </section>
-
-      {/* FOOTER */}
-      {/* Footer removed - using separate Footer component */}
-
-    </>
+    </div>
   );
 };
 

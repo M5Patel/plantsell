@@ -183,12 +183,11 @@ const ShopProducts = () => {
       </div>
 
       {/* Product Detail Modal */}
-      {selectedProduct && (
-        <ProductDetailModal 
-          product={selectedProduct} 
-          onClose={() => setSelectedProduct(null)} 
-        />
-      )}
+      <ProductDetailModal 
+        product={selectedProduct} 
+        open={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)} 
+      />
     </div>
   );
 };
